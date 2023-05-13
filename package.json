@@ -1,10 +1,11 @@
 {
   "name": "fm-app",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Serves as a CLI for bootstrapping an application together with my settings for developing Frontend Mentor challenges",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "esbuild src/index.ts --outdir=dist --bundle --watch",
+    "dev": "esbuild src/index.ts --outdir=dist --platform=node --bundle --watch",
+    "build": "esbuild src/index.ts --outdir=dist --platform=node --tree-shaking=true --minify --bundle",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

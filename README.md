@@ -1,2 +1,3 @@
 # fm-app
-Serves as repository for bootstrapping an application for developing Frontend Mentor challenges
+
+This repository serves as a CLI for bootstrapping an application together with my settings for developing Frontend Mentor challenges
