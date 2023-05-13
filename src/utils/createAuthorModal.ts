@@ -148,7 +148,7 @@ function keyDownListener(
   document
     .querySelector<HTMLButtonElement>(".modal__close")
     ?.addEventListener("click", () => {
-      this.style.display = "none";
+      modal.style.display = "none";
     });
 
   const btnKeyboard = document.querySelector<HTMLButtonElement>(".keyboard");
