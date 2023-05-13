@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { mkdir } from "node:fs/promises";
+import { mkdir, rm } from "node:fs/promises";
 import createEnv from "./utils/createEnv";
 import createIndexHtml from "./utils/createIndexHtml";
 import createViteEnv from "./utils/createViteEnv";
@@ -14,6 +14,10 @@ async function main() {
   createEnv();
   createIndexHtml();
 
+  await rm("src", {
+    recursive: true,
+    force: true,
+  });
   await mkdir("src", {
     recursive: true,
   });
