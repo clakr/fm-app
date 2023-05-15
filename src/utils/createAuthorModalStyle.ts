@@ -21,7 +21,7 @@ export default async function createAuthorModalStyle() {
 
 .keyboard {
   font-family: "Wix Madefor Display", sans-serif;
-  position: absolute;
+  position: fixed;
   inset: auto 1rem 1rem auto;
   padding: 0.75rem;
   border-radius: 0.5rem;
