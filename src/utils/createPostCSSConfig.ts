@@ -7,7 +7,7 @@ export default async function () {
     plugins: [autoprefixer],
   };`;
 
-  writeFile(".env", content, (err) => {
+  writeFile("postcss.config.js", content, (err) => {
     if (err) throw err;
   });
 }
