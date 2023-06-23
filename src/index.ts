@@ -32,7 +32,7 @@ async function main() {
 
   writePackage(template);
   createEnv();
-  createIndexHtml();
+  createIndexHtml(template);
 
   if (template === "uno") {
     createUnoPreset();

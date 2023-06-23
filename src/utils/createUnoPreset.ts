@@ -24,7 +24,7 @@ export default function presetClark(): Preset {
   }
 }`;
 
-  writeFile("clarkPreset.ts", content, (err) => {
+  writeFile("presetClark.ts", content, (err) => {
     if (err) throw err;
   });
 }

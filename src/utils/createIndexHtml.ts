@@ -1,6 +1,7 @@
 import { writeFile } from "node:fs";
+import { Template } from "../types";
 
-export default async function createIndexHtml() {
+export default async function createIndexHtml(template: Template) {
   const content = `<!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,10 +12,14 @@ export default async function createIndexHtml() {
 
     <title></title>
 
-    <!-- CSS -->
+    ${
+      template !== "uno"
+        ? `<!-- CSS -->
     <link rel="stylesheet" href="src/_preflight.css" />
     
-    <!-- Font -->
+    <!-- Font -->`
+        : ""
+    }
 
     <!-- JS Modules -->
     <script type="module" src="src/main.ts" async></script>

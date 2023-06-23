@@ -16,6 +16,7 @@ export default async function (template: Template) {
         "@unocss/reset": "^0.53.3",
         unocss: "^0.53.3",
       };
+      break;
 
     default:
       deps = { postcss: "^8.4.24", autoprefixer: "^10.4.14" };
