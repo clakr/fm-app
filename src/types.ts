@@ -1,1 +1,1 @@
-export type Template = "vanilla" | "sass";
+export type Template = "vanilla" | "sass" | "uno";
