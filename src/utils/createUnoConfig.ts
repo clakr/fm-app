@@ -2,6 +2,7 @@ import { writeFile } from "node:fs";
 
 export default async function () {
   const content = `import { defineConfig, presetWebFonts, presetWind } from "unocss";
+import transformerVariantGroup from '@unocss/transformer-variant-group';
 import presetClark from './presetClark';
 
 export default defineConfig({
@@ -12,6 +13,9 @@ export default defineConfig({
       fonts: {}
     }),
     presetClark()
+  ],
+  transformers: [
+    transformerVariantGroup(),
   ],
   layers: {
     presetClark: 3,

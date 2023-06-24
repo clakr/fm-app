@@ -14,6 +14,7 @@ export default async function (template: Template) {
         "@unocss/preset-web-fonts": "^0.53.3",
         "@unocss/preset-wind": "^0.53.3",
         "@unocss/reset": "^0.53.3",
+        "@unocss/transformer-variant-group": "^0.53.3",
         unocss: "^0.53.3",
       };
       break;
