@@ -13,6 +13,18 @@ export default defineConfig({
     }),
     presetClark()
   ],
+  layers: {
+    presetClark: 3,
+  },
+  preflights: [
+    {
+      getCSS: () =>
+        ":root { font-size: 62.5%; }",
+    },
+  ],
+  theme: {},
+  shortcuts: {},
+  rules: [],
 })`;
 
   writeFile("uno.config.ts", content, (err) => {
