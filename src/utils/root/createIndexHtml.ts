@@ -1,7 +1,23 @@
 import { writeFile } from "node:fs";
-import { Template } from "../types";
+import { Options } from "../../types";
 
-export default async function createIndexHtml(template: Template) {
+export default async function createIndexHtml(options: Options) {
+  let modules = `<script type="module" src="src/main.ts" async></script>`,
+    main = ``;
+
+  switch (options.template) {
+    case "vue":
+      modules += `\n<script type="module" src="src/_authorModal.ts" async></script>`;
+      main += `<main id="app"></main>`;
+      break;
+
+    default:
+      main += `<main>
+  <h1 class="sr-only"></h1>
+</main>`;
+      break;
+  }
+
   const content = `<!DOCTYPE html>
 <html lang="en">
   <head>
@@ -12,23 +28,11 @@ export default async function createIndexHtml(template: Template) {
 
     <title></title>
 
-    ${
-      template !== "uno"
-        ? `<!-- CSS -->
-    <link rel="stylesheet" href="src/_preflight.css" />
-    
-    <!-- Font -->`
-        : ""
-    }
-
     <!-- JS Modules -->
-    <script type="module" src="src/main.ts" async></script>
-    <script type="module" src="src/_authorModal.ts" async></script>
+    ${modules}
   </head>
   <body>
-    <main>
-     <h1 class="sr-only"></h1>
-    </main>
+    ${main}
   </body>
 </html>`;
 

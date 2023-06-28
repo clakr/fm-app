@@ -1,59 +1,8 @@
 import { writeFile } from "node:fs";
+import { Options } from "../../types";
 
-export default async function createAuthorModal() {
-  const content = `import "./_authorModal.css";
-
-function changeTextOrSource(
-  element: HTMLElement | HTMLAnchorElement | null,
-  text: string
-) {
-  if (!element) return;
-
-  if (element instanceof HTMLAnchorElement) {
-    element.setAttribute("href", text);
-    return;
-  }
-
-  if (element instanceof HTMLElement) {
-    element.textContent = text;
-    return;
-  }
-}
-
-function changeProjectInformation() {
-  const projectName = document.querySelector<HTMLElement>(".project__name");
-  const projectLink =
-    document.querySelector<HTMLAnchorElement>(".project__link");
-  const projectRepository = document.querySelector<HTMLAnchorElement>(
-    ".project__repository"
-  );
-
-  const { VITE_PROJECT_NAME, VITE_PROJECT_LINK, VITE_PROJECT_REPOSITORY } =
-    import.meta.env;
-
-  changeTextOrSource(projectName, VITE_PROJECT_NAME);
-  changeTextOrSource(projectLink, VITE_PROJECT_LINK);
-  changeTextOrSource(projectRepository, VITE_PROJECT_REPOSITORY);
-}
-
-function keyDownListener(
-  this: HTMLDivElement,
-  { metaKey, key }: KeyboardEvent
-) {
-  if ((metaKey && key === "k") || key === "/") {
-    this.style.display = "block";
-
-    document.body.style.height = "100%";
-    document.body.style.overflow = "hidden";
-  }
-
-  if (key === "Escape") {
-    this.style.display = "none";
-  }
-}
-
-(function () {
-  const isMac = window.navigator.platform === "MacIntel";
+function contentBody(template: Options["template"]) {
+  let content = `const isMac = window.navigator.platform === "MacIntel";
 
   const markup = \`
     <button type='button' class="keyboard">
@@ -165,8 +114,92 @@ function keyDownListener(
     btnKeyboard.style.backgroundColor =
       window.getComputedStyle(html).backgroundColor;
   });
-  document.addEventListener("keydown", keyDownListener.bind(modal));
-})();`;
+  document.addEventListener("keydown", keyDownListener.bind(modal));`;
+
+  switch (template) {
+    case "vue":
+      content = `const AuthorModalPlugin: Plugin = {
+  install() {
+    ${content}
+  },
+};
+
+export default AuthorModalPlugin;`;
+      break;
+
+    default:
+      content = `(function () {
+        ${content}
+      })();`;
+      break;
+  }
+
+  return content;
+}
+
+export default async function createAuthorModal(options: Options) {
+  let imports = `import "./_authorModal.css"`;
+
+  switch (options.template) {
+    case "vue":
+      imports += `\nimport { Plugin } from "vue";`;
+      break;
+  }
+
+  const content = `${imports};
+
+function changeTextOrSource(
+  element: HTMLElement | HTMLAnchorElement | null,
+  text: string
+) {
+  if (!element) return;
+
+  if (element instanceof HTMLAnchorElement) {
+    element.setAttribute("href", text);
+    return;
+  }
+
+  if (element instanceof HTMLElement) {
+    element.textContent = text;
+    return;
+  }
+}
+
+function changeProjectInformation() {
+  const projectName = document.querySelector<HTMLElement>(".project__name");
+  const projectLink =
+    document.querySelector<HTMLAnchorElement>(".project__link");
+  const projectRepository = document.querySelector<HTMLAnchorElement>(
+    ".project__repository"
+  );
+
+  const { VITE_PROJECT_NAME, VITE_PROJECT_LINK, VITE_PROJECT_REPOSITORY } =
+    import.meta.env;
+
+  changeTextOrSource(projectName, VITE_PROJECT_NAME);
+  changeTextOrSource(projectLink, VITE_PROJECT_LINK);
+  changeTextOrSource(projectRepository, VITE_PROJECT_REPOSITORY);
+}
+
+function keyDownListener(
+  this: HTMLDivElement,
+  { metaKey, key }: KeyboardEvent
+) {
+  if ((metaKey && key === "k") || key === "/") {
+    this.style.display = "block";
+
+    document.body.style.height = "100%";
+    document.body.style.overflow = "hidden";
+  }
+
+  if (key === "Escape") {
+    this.style.display = "none";
+  }
+}
+
+${contentBody(options.template)}
+
+`;
 
   writeFile("src/_authorModal.ts", content, (err) => {
     if (err) throw err;

@@ -1,6 +1,6 @@
 import { writeFile } from "node:fs";
 
-export default async function createViteEnv() {
+export default async function () {
   const content = `/// <reference types="vite/client" />
 
   interface ImportMetaEnv {

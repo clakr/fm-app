@@ -1,1 +1,4 @@
-export type Template = "vanilla" | "sass" | "uno";
+export type Options = {
+  template: "html" | "vue";
+  css: "vanilla" | "sass" | "uno";
+};
