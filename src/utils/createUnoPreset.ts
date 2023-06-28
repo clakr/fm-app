@@ -14,55 +14,61 @@ export default function presetClark(): Preset {
     },
     rules: [
       [
-        /^mt-([\d.-]+)$/,
+        /^mt-([\\d.-]+)$/,
         ([, value]) => ({
-          "margin-top": \`\\\${value}rem\`,
+          "margin-top": \`\${value}rem\`,
         }),
       ],
       [
-        /^mb-([\d.-]+)$/,
+        /^mb-([\\d.-]+)$/,
         ([, value]) => ({
           "margin-bottom": \`\${value}rem\`,
         }),
       ],
       [
-        /^ml-([\d.-]+)$/,
+        /^ml-([\\d.-]+)$/,
         ([, value]) => ({
           "margin-left": \`\${value}rem\`,
         }),
       ],
       [
-        /^my-([\d.-]+)\/([\d.-]+)$/,
+        /^my-([\\d.-]+)\\/([\\d.-]+)$/,
         ([, topValue, bottomValue]) => ({
           "margin-block": \`\${topValue}rem \${bottomValue}rem\`,
         }),
       ],
       [
-        /^w-([\d.-]+)$/,
+        /^mx-([\\d.-]+)\\/([\\d.-]+)$/,
+        ([, leftValue, rightValue]) => ({
+          "margin-inline": \`\${leftValue}rem \${rightValue}rem\`,
+        }),
+      ],
+      [
+        /^w-([\\d.-]+)$/,
         ([, value]) => ({
           width: \`\${value}rem\`,
         }),
       ],
       [
-        /^h-([\d.-]+)$/,
+        /^h-([\\d.-]+)$/,
         ([, value]) => ({
           height: \`\${value}rem\`,
         }),
       ],
       [
-        /^fs-([\d.-]+)$/,
+        /^fs-([\\d.-]+)$/,
         ([, value]) => ({
           "font-size": \`\${value}rem\`,
         }),
       ],
       [
-        /^lh-([\d.-]+)$/,
+        /^lh-([\\d.-]+)$/,
         ([, value]) => ({
           "line-height": \`\${value}rem\`,
         }),
       ],
       [
-        /^px-([\d.-]+)$/,
+        /^px-([\\d.-]+)$/,
         ([, value]) => ({
           "padding-inline": \`\${value}rem\`,
         }),
@@ -74,56 +80,61 @@ export default function presetClark(): Preset {
         }),
       ],
       [
-        /^br-([\d.-]+)$/,
+        /^br-([\\d.-]+)$/,
         ([, value]) => ({
           "border-radius": \`\${value}rem\`,
         }),
       ],
       [
-        /^py-([\d.-]+)$/,
+        /^py-([\\d.-]+)$/,
         ([, value]) => ({
           "padding-block": \`\${value}rem\`,
         }),
       ],
       [
-        /^top-([\d.-]+)$/,
+        /^top-([\\d.-]+)$/,
         ([, value]) => ({
           top: \`\${value}rem\`,
         }),
       ],
       [
-        /^gap-([\d.-]+)$/,
+        /^right-([\\d.-]+)$/,
+        ([, value]) => ({
+          right: \`\${value}rem\`,
+        }),
+      ],
+      [
+        /^gap-([\\d.-]+)$/,
         ([, value]) => ({
           gap: \`\${value}rem\`,
         }),
       ],
       [
-        /^ls-([\d.-]+)$/,
+        /^ls-([\\d.-]+)$/,
         ([, value]) => ({
           "letter-spacing": \`\${value}rem\`,
         }),
       ],
       [
-        /^pt-([\d.-]+)$/,
+        /^pt-([\\d.-]+)$/,
         ([, value]) => ({
           "padding-top": \`\${value}rem\`,
         }),
       ],
       [
-        /^pb-([\d.-]+)$/,
+        /^pb-([\\d.-]+)$/,
         ([, value]) => ({
           "padding-bottom": \`\${value}rem\`,
         }),
       ],
-
       [
-        /^max-w-([\d.-]+)$/,
+        /^max-w-([\\d.-]+)$/,
         ([, value]) => ({
           "max-width": \`\${value}rem\`,
         }),
       ],
       [
-        /^gap-x-([\d.-]+)$/,
+        /^gap-x-([\\d.-]+)$/,
         ([, value]) => ({
           "grid-column-gap": \`\${value}rem\`,
           "column-gap": \`\${value}rem\`,
