@@ -29,7 +29,7 @@ export default async function (options: Options) {
     await mkdir("src/components", { recursive: true });
     await mkdir("src/components", { recursive: true });
 
-    createAppVue();
+    createAppVue(options.css);
     createProjectConfig();
   }
 }
