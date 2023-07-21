@@ -8,6 +8,9 @@ export default async function (options: Options) {
       postcss: "^8.4.24",
       typescript: "^5.0.2",
       vite: "^4.3.9",
+      prettier: "^3.0.0",
+      husky: "^8.0.3",
+      "lint-staged": "^13.2.3",
     };
 
   switch (options.template) {
@@ -55,6 +58,8 @@ export default async function (options: Options) {
     const contents = JSON.parse(data) as {
       dependencies: Record<string, string>;
       devDependencies: Record<string, string>;
+      "lint-staged": Record<string, string[]>;
+      husky: Record<string, Record<string, string>>;
     };
     contents.dependencies = {
       ...contents.dependencies,
@@ -63,6 +68,15 @@ export default async function (options: Options) {
     contents.devDependencies = {
       ...contents.devDependencies,
       ...devDeps,
+    };
+    contents["lint-staged"] = {
+      "src/**/*.{html,ts,scss,vue}": ["prettier --write"],
+      "src/**/*.ts": ["eslint --fix"],
+    };
+    contents.husky = {
+      hooks: {
+        "pre-commit": "lint-staged",
+      },
     };
 
     const stringify = JSON.stringify(contents);
