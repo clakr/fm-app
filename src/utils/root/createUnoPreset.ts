@@ -140,6 +140,43 @@ export default function presetClark(): Preset {
           "column-gap": \`\${value}rem\`,
         }),
       ],
+      [
+        /^gap-y-([\d.-]+)$/,
+        ([, value]) => ({
+          "grid-row-gap": \`\${value}rem\`,
+          "row-gap": \`\${value}rem\`,
+        }),
+      ],
+      [
+        /^p-([\d.-]+)\/([\d.-]+)$/,
+        ([, blockValue, inlineValue]) => ({
+          "padding-block": \`\${blockValue}rem\`,
+          "padding-inline": \`\${inlineValue}rem\`,
+        }),
+      ],
+      [
+        /^space-y-([\d.-]+)$/,
+        ([, value]) => ({
+          "--un-space-y-reverse": 0,
+          "margin-top": \`calc(\${value}rem * calc(1 - var(--un-space-y-reverse)))\`,
+          "margin-bottom": \`calc(\${value}rem * var(--un-space-y-reverse))\`,
+        }),
+      ],
+      [
+        /^gap-([\d.-]+)\/([\d.-]+)$/,
+        ([, rowValue, columnValue]) => ({
+          "grid-row-gap": \`\${rowValue}rem\`,
+          "row-gap": \`\${rowValue}rem\`,
+          "grid-column-gap": \`\${columnValue}rem\`,
+          "column-gap": \`\${columnValue}rem\`,
+        }),
+      ],
+      [
+        /^p-([\d.-]+)$/,
+        ([, value]) => ({
+          padding: \`\${value}rem\`,
+        }),
+      ],
     ]
   }
 }`;
