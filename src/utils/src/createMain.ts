@@ -7,7 +7,10 @@ export default async function createMain(options: Options) {
 
   switch (options.css) {
     case "sass":
-      imports = 'import "./style.scss';
+      imports = `
+import "./_preflight.css"
+import "./style.scss
+`;
       break;
 
     case "uno":
@@ -16,7 +19,10 @@ import "virtual:uno.css";`;
       break;
 
     default:
-      imports = 'import "./style.css';
+      imports = `
+import "./_preflight.css";
+import "./style.css
+`;
       break;
   }
 
@@ -26,8 +32,7 @@ import "virtual:uno.css";`;
 import App from "./App.vue";
 import authorModal from "./_authorModal";
 import projectConfig from "./_projectConfig";
-import "./_preflight.css";
-import "./style.css";
+${imports}
 
 createApp(App)
   .use(projectConfig)

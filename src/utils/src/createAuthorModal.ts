@@ -110,16 +110,21 @@ function contentBody(template: Options["template"]) {
     modal.style.display = "block";
   });
 
-  window.addEventListener("load", function () {
-    btnKeyboard.style.backgroundColor =
-      window.getComputedStyle(html).backgroundColor;
-  });
+  ${
+    template === "vue"
+      ? `window.addEventListener("load", function () {
+  btnKeyboard.style.backgroundColor =
+    window.getComputedStyle(html).backgroundColor;
+});`
+      : ""
+  }
+  
   document.addEventListener("keydown", keyDownListener.bind(modal));`;
 
   switch (template) {
     case "vue":
       content = `const AuthorModalPlugin: Plugin = {
-  install() {
+  install(app) {
     ${content}
   },
 };
@@ -195,6 +200,22 @@ function keyDownListener(
   if (key === "Escape") {
     this.style.display = "none";
   }
+}
+
+${
+  options.template === "vue"
+    ? `function changeKeyboardBtnBackgroundColor() {
+const html = document.querySelector("html");
+if (!html) return;
+
+const btnKeyboard = document.querySelector<HTMLButtonElement>(".keyboard");
+if (!btnKeyboard) return;
+
+btnKeyboard.style.backgroundColor =
+  window.getComputedStyle(html).backgroundColor;
+}
+`
+    : ""
 }
 
 ${contentBody(options.template)}

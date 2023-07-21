@@ -18,7 +18,6 @@ export default async function (options: Options) {
     recursive: true,
   });
 
-  createPreflight();
   createViteEnv();
   createMain(options);
   createStyle(options);
@@ -31,5 +30,9 @@ export default async function (options: Options) {
 
     createAppVue(options.css);
     createProjectConfig();
+  }
+
+  if (options.css !== "uno") {
+    createPreflight();
   }
 }
